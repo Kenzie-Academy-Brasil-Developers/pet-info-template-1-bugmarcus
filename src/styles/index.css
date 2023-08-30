@@ -10,3 +10,14 @@
   text-align: center;
   gap: 1.25rem;
 }
+
+.alert {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
