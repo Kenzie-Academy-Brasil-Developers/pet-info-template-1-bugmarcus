@@ -1,16 +1,19 @@
 import { baseUrl } from "./requests.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const authenticated = localStorage.getItem("@petinfo:authenticated");
+
+  if (authenticated === "true") {
+    window.location.href = "./src/pages/feed.html"; // Redireciona para a página de feed
+  }
+
   const registerButton = document.getElementById("register__button");
+  const loginForm = document.querySelector(".form__container");
+  const loginSubmitButton = document.getElementById("login__submit");
 
   registerButton.addEventListener("click", () => {
     window.location.href = "./src/pages/register.html"; // Redireciona para a página de Registro
   });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.querySelector(".form__container");
-  const loginSubmitButton = document.getElementById("login__submit");
 
   loginSubmitButton.addEventListener("click", async (event) => {
     event.preventDefault();

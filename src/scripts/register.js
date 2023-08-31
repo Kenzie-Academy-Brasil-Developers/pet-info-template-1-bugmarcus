@@ -33,6 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ok) {
         const user = await response.json();
         console.log("Novo usuário criado:", user);
+        const successToast = document.getElementById("success-toast");
+        successToast.classList.remove("hidden");
+
+        // Espere por um tempo (por exemplo, 3 segundos) antes de redirecionar
+        setTimeout(() => {
+          window.location.href = "../../index.html";
+        }, 3000); // Redireciona após 3 segundos
+        localStorage.setItem("@petinfo:token", data.token);
+        localStorage.setItem("@petinfo:authenticated", "true");
       } else {
         console.error("Erro ao criar usuário");
       }
