@@ -89,7 +89,10 @@
 
 /* FEED */
 .feed__title {
-  padding-block: 3rem;
+  width: 108rem;
+  height: 4rem;
+  flex-shrink: 0;
+  background-color: var(--gray-8);
 }
 
 /* POSTS */
@@ -161,6 +164,14 @@
   background-color: transparent;
   text-align: start;
   cursor: pointer;
+  background-color: transparent;
+  text-align: start;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--brand-2);
+  font-weight: bold;
 }
 
 .post__open:hover {
@@ -179,23 +190,51 @@
 /* Modal */
 .modal {
   display: none; /* Inicialmente oculto */
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
   z-index: 1000; /* Garante que o modal fique na parte superior */
   overflow: auto; /* Permite rolagem quando o conteúdo é longo */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modal__title {
+  margin-bottom: 1.75rem;
 }
 
 .modal__content {
-  background-color: #fff;
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra suave */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  width: 50rem;
+  padding: 2rem 1.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  background: var(--grey-9, #fcfeff);
+  flex-direction: column;
+}
+
+.modal__input {
+  display: inline-flex;
+  padding: 0.625rem 1.0625rem;
+  width: -webkit-fill-available;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+
+.modal__textarea {
+  display: flex;
+  width: -webkit-fill-available;
+  height: 7.5rem;
+  padding: 0.625rem 1.0625rem;
+  align-items: flex-start;
+  gap: 0.625rem;
+  flex-shrink: 0;
 }
 
 .modal__close {
@@ -203,4 +242,55 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+.modal__buttons {
+  display: flex;
+  align-items: end;
+  align-self: flex-end;
+}
+
+.modal__cancel {
+  margin-top: 2.25rem;
+  margin-right: 1rem;
+}
+
+.modal__close {
+  display: inline-flex;
+  height: 2rem;
+  padding: 0.25rem 0.875rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  color: var(--gray-4);
+  background: var(--gray-6);
+  border-radius: 0.25rem;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+}
+
+.post-title {
+  color: var(--gray-1);
+  font-family: IBM Plex Sans;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 2.25rem */
+}
+
+.post-content {
+  margin-top: 2rem;
+}
+
+.modal-content {
+  color: #495057;
+  font-family: IBM Plex Sans;
+  font-size: 1rem;
+  font-style: normal;
+  align-self: stretch;
+  font-weight: 400;
+  line-height: 150%;
 }

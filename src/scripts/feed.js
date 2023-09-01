@@ -1,9 +1,22 @@
-import { renderAllPosts } from "./render.js";
+if (!localStorage.getItem("@petinfo:token")) {
+  // Redirecione para ../index.html
+  window.location.pathname = "../index.html";
+}
+import { renderAllPosts, renderPost } from "./render.js";
 import { getCurrentUserInfo } from "./requests.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const userAction = document.querySelector(".user__image");
+  const userUniqueName = document.querySelector(".user__uniquename");
   const menu = document.querySelector(".user__logout");
+  const logoutButton = document.querySelector(".logout__button");
+
+  // Adicione um evento de clique ao botão de logout
+  logoutButton.addEventListener("click", () => {
+    // Remova a autenticação do localStorage
+    localStorage.removeItem("@petinfo:token");
+    window.location.href = "../../index.html";
+  });
 
   userAction.addEventListener("click", (e) => {
     menu.classList.toggle("hidden");
@@ -16,10 +29,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   const userInfo = await getCurrentUserInfo();
   if (userInfo && userInfo.avatar) {
     userAction.src = userInfo.avatar;
+    userUniqueName.textContent = `@${userInfo.username}`;
   }
 
   renderAllPosts();
+
+  // Adicione um evento de clique a cada botão de "Acessar Publicação"
+  const accessButtons = document.querySelectorAll(".post__open");
+  accessButtons.forEach((button) => {
+    console.log("Botão encontrado:", button); // Adicione esta linha
+    button.addEventListener("click", () => {
+      const postId = button.dataset.id;
+      console.log("Botão 'Acessar Publicação' clicado. postId:", postId);
+      renderPost(postId);
+    });
+  });
 });
+
+export function openPostModal() {}
 
 function openCreatePostModal() {
   const modal = document.getElementById("create-post-modal");
@@ -48,6 +75,8 @@ function openCreatePostModal() {
 
   publishButton.addEventListener("click", async () => {
     // Obtenha os valores dos campos de título e conteúdo
+    const titleInput = modal.querySelector("#post-title");
+    const contentInput = modal.querySelector("#post-content");
     const title = titleInput.value;
     const content = contentInput.value;
 

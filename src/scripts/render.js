@@ -1,3 +1,4 @@
+import { openPostModal } from "./feed.js";
 import { getCurrentUserInfo, getAllPosts } from "./requests.js";
 
 // Renderiza todos os posts
@@ -10,10 +11,22 @@ export async function renderAllPosts() {
     const postArticle = await renderPost(post, true);
     postSection.appendChild(postArticle);
   });
+
+  // Adicione aqui a delegação de eventos
+  const postsSection = document.querySelector(".posts");
+
+  postsSection.addEventListener("click", (event) => {
+    const button = event.target.closest(".post__open");
+    if (button) {
+      const postId = button.dataset.id;
+      console.log("Botão 'Acessar Publicação' clicado. postId:", postId);
+      openPostModal(postId);
+    }
+  });
 }
 
 // Renderiza um post
-async function renderPost(post) {
+export async function renderPost(post) {
   const postContainer = document.createElement("article");
   postContainer.classList.add("post");
 

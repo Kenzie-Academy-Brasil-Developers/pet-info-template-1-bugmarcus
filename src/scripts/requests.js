@@ -76,4 +76,25 @@ export async function getAllPosts() {
   }
 }
 
-// Desenvolva as funcionalidades de requisições aqui
+// Post unico
+export async function getSinglePost() {
+  try {
+    const posts = await authenticatedRequest(`${baseUrl}/posts`, "GET");
+    return posts;
+  } catch (error) {
+    console.error("Erro ao obter posts:", error);
+  }
+}
+
+export async function getPostDetailsById(postId) {
+  console.log(postId);
+  try {
+    const post = await authenticatedRequest(
+      `${baseUrl}/posts/${postId}`,
+      "GET"
+    );
+    return post;
+  } catch (error) {
+    console.error("Erro ao obter detalhes do post:", error);
+  }
+}
