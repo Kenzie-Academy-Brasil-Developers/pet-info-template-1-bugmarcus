@@ -1,47 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Petinfo - Feed</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="../../src/styles/reset.css" />
-    <link rel="stylesheet" href="../../src/styles/globalStyles.css" />
-    <link rel="stylesheet" href="../../src/styles/feed.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petinfo - Feed</title>
 
-    <!-- SCRIPTS -->
-    <script type="module" src="../scripts/feed.js" defer></script>
-  </head>
-  <body>
-    <header class="header">
-      <div class="header__container">
-        <h2 class="title3 header__title bold">Petinfo</h2>
-        <nav class="user-nav__container">
-          <div class="user__action">
-            <button id="user__newpost" class="btn btn--brand btn--large text3">
-              Criar publicação
-            </button>
-            <img class="user__image" src="" alt="" />
-          </div>
-          <div class="user__logout hidden">
-            <h2 class="user__uniquename text3 bolder"></h2>
-            <button class="text4 logout__button">
-              <div class="logout__icon"></div>
-              Sair da conta
-            </button>
-          </div>
-        </nav>
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../src/styles/reset.css" />
+  <link rel="stylesheet" href="../../src/styles/globalStyles.css" />
+  <link rel="stylesheet" href="../../src/styles/feed.css" />
+
+  <!-- SCRIPTS -->
+  <script type="module" src="../scripts/feed.js" defer></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="header__container">
+      <h2 class="title3 header__title bold">Petinfo</h2>
+      <nav class="user-nav__container">
+        <div class="user__action">
+          <button id="user__newpost" class="btn btn--brand btn--large text3">
+            Criar publicação
+          </button>
+          <img class="user__image" src="" alt="" />
+        </div>
+        <div class="user__logout hidden">
+          <h2 class="user__uniquename text3 bolder"></h2>
+          <button class="text4 logout__button">
+            <div class="logout__icon"></div>
+            Sair da conta
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="main">
+    <h1 class="feed__title text2 bolder">Feed</h1>
+    <div id="create-post-modal" class="modal">
+      <div class="modal__content">
+        <span class="modal__close">&times;</span>
+        <h2 class="modal__title text2 bolder">Criando novo post</h2>
+        <label for="post-title" class="modal__label text3">Título do post:</label>
+        <input type="text" id="post-title" class="modal__input text3" placeholder="Digite o título aqui..." />
+        <label for="post-content" class="modal__label text3">Conteúdo do post:</label>
+        <textarea id="post-content" class="modal__textarea text3"
+          placeholder="Desenvolva o conteúdo do post aqui..."></textarea>
+        <div class="modal__buttons">
+          <button class="btn btn--gray btn--small text3 modal__cancel">Cancelar</button>
+          <button class="btn btn--brand btn--small text3 modal__publish">Publicar</button>
+        </div>
       </div>
-    </header>
-    <main class="main">
-      <h1 class="feed__title text2 bolder">Feed</h1>
+    </div>
+    <!-- POSTS -->
+    <section class="posts">
+      <!-- Aqui serão renderizados os posts -->
+    </section>
+  </main>
+</body>
 
-      <!-- POSTS -->
-      <section class="posts">
-        <!-- Aqui serão renderizados os posts -->
-      </section>
-    </main>
-  </body>
 </html>
