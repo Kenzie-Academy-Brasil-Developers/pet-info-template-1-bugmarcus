@@ -294,3 +294,9 @@
   font-weight: 400;
   line-height: 150%;
 }
+
+#modal-author-avatar {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}

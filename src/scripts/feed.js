@@ -3,7 +3,7 @@ if (!localStorage.getItem("@petinfo:token")) {
   window.location.pathname = "../index.html";
 }
 import { renderAllPosts, renderPost } from "./render.js";
-import { getCurrentUserInfo } from "./requests.js";
+import { getCurrentUserInfo, getPostDetailsById } from "./requests.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const userAction = document.querySelector(".user__image");
@@ -34,19 +34,59 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   renderAllPosts();
 
-  // Adicione um evento de clique a cada botão de "Acessar Publicação"
-  const accessButtons = document.querySelectorAll(".post__open");
-  accessButtons.forEach((button) => {
-    console.log("Botão encontrado:", button); // Adicione esta linha
-    button.addEventListener("click", () => {
+  // Adicione um evento de clique a cada botão de "Acessar Publicação" após renderizar os posts
+  const postsSection = document.querySelector(".posts");
+  postsSection.addEventListener("click", async (event) => {
+    const button = event.target.closest(".post__open");
+    if (button) {
       const postId = button.dataset.id;
       console.log("Botão 'Acessar Publicação' clicado. postId:", postId);
-      renderPost(postId);
-    });
+      const postDetails = await getPostDetailsById(postId);
+      openPostModal(postDetails);
+    }
   });
 });
 
-export function openPostModal() {}
+export function openPostModal(postDetails) {
+  // Obtenha os elementos do modal
+  const modal = document.getElementById("post-modal");
+  const modalTitle = modal.querySelector("#modal-title");
+  const modalAuthor = modal.querySelector("#modal-author");
+  const modalDate = modal.querySelector("#modal-date");
+  const modalContent = modal.querySelector("#modal-content");
+  const modalAuthorAvatar = modal.querySelector("#modal-author-avatar"); // Novo elemento para o avatar
+  const closeModalButton = modal.querySelector(".modal__close");
+
+  // Preencha os elementos com os detalhes do post
+  modalTitle.textContent = postDetails.title;
+  modalDate.textContent = postDetails.created_at; // Data de criação
+  modalContent.textContent = postDetails.content;
+
+  // Verifique se user e avatar existem
+  if (postDetails.user && postDetails.user.avatar) {
+    // Defina o src da tag de imagem para exibir o avatar
+    modalAuthorAvatar.src = postDetails.user.avatar;
+    modalAuthorAvatar.alt = postDetails.user.username || "Avatar do autor"; // Adicionar um texto alt
+    modalAuthorAvatar.style.display = "block"; // Exiba a imagem do avatar
+  }
+
+  // Verifique se o autor existe e defina o texto do autor
+  if (postDetails.user && postDetails.username) {
+    modalAuthor.textContent = postDetails.user.username;
+  } else {
+    modalAuthor.textContent = "Autor Desconhecido";
+  }
+
+  // Exiba o modal
+  modal.style.display = "block";
+
+  // Adicione um evento de clique para fechar o modal
+  closeModalButton.addEventListener("click", () => closeModal(modal));
+}
+
+function closeModal(modal) {
+  modal.style.display = "none";
+}
 
 function openCreatePostModal() {
   const modal = document.getElementById("create-post-modal");
@@ -108,8 +148,4 @@ function openCreatePostModal() {
       console.error("Erro ao criar a postagem:", error);
     }
   });
-}
-
-function closeModal(modal) {
-  modal.style.display = "none";
 }

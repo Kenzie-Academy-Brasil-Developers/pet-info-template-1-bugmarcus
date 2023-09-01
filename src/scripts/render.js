@@ -7,10 +7,10 @@ export async function renderAllPosts() {
   postSection.innerHTML = "";
   const posts = await getAllPosts();
 
-  posts.forEach(async (post) => {
+  for (const post of posts) {
     const postArticle = await renderPost(post, true);
     postSection.appendChild(postArticle);
-  });
+  }
 
   // Adicione aqui a delegação de eventos
   const postsSection = document.querySelector(".posts");
