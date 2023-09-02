@@ -2,7 +2,7 @@ if (!localStorage.getItem("@petinfo:token")) {
   // Redirecione para ../index.html
   window.location.pathname = "../index.html";
 }
-import { renderAllPosts, renderPost } from "./render.js";
+import { renderAllPosts, handleDate } from "./render.js";
 import { getCurrentUserInfo, getPostDetailsById } from "./requests.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const button = event.target.closest(".post__open");
     if (button) {
       const postId = button.dataset.id;
-      console.log("Botão 'Acessar Publicação' clicado. postId:", postId);
       const postDetails = await getPostDetailsById(postId);
       openPostModal(postDetails);
     }
@@ -59,22 +58,15 @@ export function openPostModal(postDetails) {
 
   // Preencha os elementos com os detalhes do post
   modalTitle.textContent = postDetails.title;
-  modalDate.textContent = postDetails.created_at; // Data de criação
+  modalDate.textContent = handleDate(postDetails.created_at); // Data de criação
   modalContent.textContent = postDetails.content;
-
   // Verifique se user e avatar existem
   if (postDetails.user && postDetails.user.avatar) {
     // Defina o src da tag de imagem para exibir o avatar
     modalAuthorAvatar.src = postDetails.user.avatar;
     modalAuthorAvatar.alt = postDetails.user.username || "Avatar do autor"; // Adicionar um texto alt
     modalAuthorAvatar.style.display = "block"; // Exiba a imagem do avatar
-  }
-
-  // Verifique se o autor existe e defina o texto do autor
-  if (postDetails.user && postDetails.username) {
     modalAuthor.textContent = postDetails.user.username;
-  } else {
-    modalAuthor.textContent = "Autor Desconhecido";
   }
 
   // Exiba o modal

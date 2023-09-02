@@ -87,7 +87,6 @@ export async function getSinglePost() {
 }
 
 export async function getPostDetailsById(postId) {
-  console.log(postId);
   try {
     const post = await authenticatedRequest(
       `${baseUrl}/posts/${postId}`,

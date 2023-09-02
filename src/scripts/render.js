@@ -19,7 +19,6 @@ export async function renderAllPosts() {
     const button = event.target.closest(".post__open");
     if (button) {
       const postId = button.dataset.id;
-      console.log("Botão 'Acessar Publicação' clicado. postId:", postId);
       openPostModal(postId);
     }
   });
@@ -138,7 +137,7 @@ function renderPostActions(postID) {
 }
 
 // Lida com a data atual
-function handleDate(timeStamp) {
+export function handleDate(timeStamp) {
   const months = [
     "Janeiro",
     "Fevereiro",

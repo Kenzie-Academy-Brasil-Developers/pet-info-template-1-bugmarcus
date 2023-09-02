@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         const user = await response.json();
-        console.log("Novo usuário criado:", user);
         const successToast = document.getElementById("success-toast");
         successToast.classList.remove("hidden");
 
