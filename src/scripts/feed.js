@@ -132,6 +132,8 @@ function openCreatePostModal() {
       if (response.ok) {
         // Postagem criada com sucesso, faça algo, se necessário
         closeModal(modal);
+
+        renderAllPosts();
       } else {
         // Exiba uma mensagem de erro, se necessário
         console.error("Erro ao criar a postagem");

@@ -5,11 +5,16 @@ import { getCurrentUserInfo, getAllPosts } from "./requests.js";
 export async function renderAllPosts() {
   const postSection = document.querySelector(".posts");
   postSection.innerHTML = "";
-  const posts = await getAllPosts();
 
-  for (const post of posts) {
-    const postArticle = await renderPost(post, true);
-    postSection.appendChild(postArticle);
+  try {
+    const posts = await getAllPosts(); // Obtém a lista atualizada de posts
+
+    for (const post of posts) {
+      const postArticle = await renderPost(post, true);
+      postSection.appendChild(postArticle);
+    }
+  } catch (error) {
+    console.error("Erro ao obter posts:", error);
   }
 
   // Adicione aqui a delegação de eventos
